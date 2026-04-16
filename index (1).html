@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramzi Ben Ali — Enseignant-Chercheur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2240;
+    --blue: #1a56a0;
+    --blue-light: #e8f0fb;
+    --blue-mid: #c2d5f5;
+    --accent: #1a56a0;
+    --text: #1a1a2e;
+    --muted: #5a6278;
+    --border: #dde4f0;
+    --bg: #f9fafc;
+    --white: #ffffff;
+    --serif: 'Lora', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+  }
+
+  .site-logo {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--navy);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  nav {
+    display: flex;
+    gap: 2px;
+  }
+
+  nav a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: color .15s, background .15s;
+    letter-spacing: 0.02em;
+  }
+
+  nav a:hover { color: var(--blue); background: var(--blue-light); }
+  nav a.active { color: var(--blue); font-weight: 500; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 2rem 3.5rem;
+  }
+
+  .hero-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 1.6rem;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--blue);
+    text-decoration: none;
+    border: 1px solid var(--blue-mid);
+    padding: 6px 14px;
+    border-radius: 6px;
+    background: var(--white);
+    transition: background .15s, border-color .15s;
+  }
+
+  .hero-links a:hover { background: var(--blue-light); border-color: var(--blue); }
+
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px 12px;
+    border-radius: 20px;
+  }
+
+  /* Photo placeholder */
+  .photo-wrap {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--blue-mid);
+    flex-shrink: 0;
+    background: var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue);
+    font-family: var(--serif);
+    font-size: 36px;
+    font-style: italic;
+  }
+
+  .photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none; /* Afficher quand photo ajoutée */
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 80px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.6rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 3px; }
+
+  p { color: var(--muted); font-size: 14px; }
+
+  /* ── TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; }
+
+  .tl-row {
+    display: grid;
+    grid-template-columns: 130px 1px 1fr;
+    gap: 0 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .tl-year {
+    font-size: 13px;
+    color: var(--blue);
+    font-weight: 500;
+    text-align: right;
+    padding-top: 3px;
+  }
+
+  .tl-line-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tl-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid var(--white);
+    outline: 1.5px solid var(--blue-mid);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .tl-line {
+    flex: 1;
+    width: 1px;
+    background: var(--border);
+    margin-top: 4px;
+  }
+
+  .tl-row:last-child .tl-line { background: transparent; }
+
+  .tl-content { padding-top: 2px; }
+  .tl-content p { margin-top: 2px; font-size: 13px; }
+
+  /* ── STAT BAR ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+  }
+
+  .stat-n {
+    font-family: var(--serif);
+    font-size: 30px;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-l { font-size: 12px; color: var(--muted); }
+
+  /* ── CARDS GRID ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    transition: border-color .15s, box-shadow .15s;
+  }
+
+  .card:hover { border-color: var(--blue-mid); box-shadow: 0 2px 12px rgba(26,86,160,0.07); }
+  .card h4 { font-size: 13.5px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    background: var(--blue-light);
+    color: var(--blue);
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* ── PUBLICATIONS ── */
+  .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .pub {
+    display: grid;
+    grid-template-columns: 4px 1fr;
+    gap: 1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color .15s;
+  }
+
+  .pub:hover { border-color: var(--blue-mid); }
+
+  .pub-bar { background: var(--blue); }
+  .pub-body { padding: 1rem 1rem 1rem 0; }
+  .pub-title { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 3px; }
+  .pub-authors { font-size: 12px; color: var(--muted); }
+  .pub-venue { font-size: 12px; color: var(--blue); margin-top: 3px; font-style: italic; }
+
+  .pub-type {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+  }
+
+  .pub-type.journal { background: #e3f5ec; color: #1a7a45; }
+  .pub-type.conf { background: var(--blue-light); color: var(--blue); }
+  .pub-type.book { background: #fef3e2; color: #a85d00; }
+
+  /* ── CERTIFICATIONS ── */
+  .cert-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .cert {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .8rem 1rem;
+  }
+
+  .cert-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .cert h4 { font-size: 13px; font-weight: 500; color: var(--navy); }
+  .cert p { font-size: 12px; color: var(--muted); }
+
+  /* ── SKILLS ── */
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .skill {
+    font-size: 13px;
+    padding: 5px 15px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text);
+    transition: border-color .15s, color .15s;
+  }
+
+  .skill:hover { border-color: var(--blue); color: var(--blue); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  footer a { color: var(--blue); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .photo-wrap { width: 90px; height: 90px; font-size: 26px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .tl-row { grid-template-columns: 90px 1px 1fr; }
+    nav a { font-size: 12px; padding: 5px 10px; }
+    h1 { font-size: 26px; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-inner, section { animation: fadeUp .5s ease both; }
+  section:nth-child(2) { animation-delay: .05s; }
+  section:nth-child(3) { animation-delay: .1s; }
+  section:nth-child(4) { animation-delay: .15s; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="header-inner">
+    <span class="site-logo">Ramzi Ben Ali</span>
+    <nav>
+      <a href="#parcours" class="active">Parcours</a>
+      <a href="#enseignement">Enseignement</a>
+      <a href="#recherche">Recherche</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Enseignant · Chercheur</div>
+      <h1>Ramzi Ben Ali</h1>
+      <p class="hero-subtitle">
+        Enseignant contractuel à l'IUT Aurillac — Université Clermont Auvergne.<br>
+        Doctorat en Ingénierie des Systèmes Informatiques (ENIS, 2020).<br>
+        Spécialité : apprentissage profond appliqué à la classification d'images médicales.
+      </p>
+      <div class="hero-links">
+        <a href="https://scholar.google.com" target="_blank">
+          <!-- Scholar icon -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Google Scholar
+        </a>
+        <a href="https://www.researchgate.net" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+          ResearchGate
+        </a>
+        <a href="https://www.linkedin.com" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:ramzi.benali@uca.fr">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          ramzi.benali@uca.fr
+        </a>
+      </div>
+      <div class="hero-chips">
+        <span class="chip">Deep Learning</span>
+        <span class="chip">Imagerie médicale</span>
+        <span class="chip">Bases de données</span>
+        <span class="chip">Réseaux</span>
+        <span class="chip">Science des données</span>
+        <span class="chip">CUDA / GPU</span>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <!-- Remplacez l'image ci-dessous par votre photo -->
+      <img src="photo.jpg" alt="Photo de Ramzi Ben Ali" id="profile-photo">
+      <span id="initials">R<em>B</em></span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main>
+
+  <!-- PARCOURS -->
+  <section id="parcours">
+    <div class="section-label">Biographie</div>
+    <h2>Parcours académique &amp; professionnel</h2>
+    <div class="timeline">
+
+      <div class="tl-row">
+        <div class="tl-year">2025 – présent</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h3>Enseignant contractuel</h3>
+          <p>IUT Aurillac, Université Clermont Auvergne — Département Science des Données</p>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-year">2023 – 2025</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h3>ATER (Attaché Temporaire d'Enseignement et de Recherche)</h3>
+          <p>Université de Tours — UFR Sciences et Techniques, Blois — Département Informatique</p>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-year">2020</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h3>Doctorat — Mention très honorable</h3>
+          <p>École Nationale d'Ingénieurs de Sfax (ENIS) — Spécialité : Ingénierie des Systèmes Informatiques. Thèse : <em>Apprentissage des réseaux de neurones profonds utilisant le codage parcimonieux et l'analyse par ondelettes : Application à la classification des images médicales.</em></p>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-year">2013 – 2023</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h3>Technologue</h3>
+          <p>ISET de Gabès — Département Sciences et Technologies de l'Information et de la Communication (STIC)</p>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-year">2007 – 2013</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h3>Assistant Technologue</h3>
+          <p>ISET de Kébili — Département Informatique</p>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-year">2005</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <h3>Diplôme d'Ingénieur — Mention Bien</h3>
+          <p>École Nationale des Sciences de l'Informatique (ENSI) — Spécialité Systèmes d'Information</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Compétences -->
+    <div class="section-label" style="margin-top:1rem">Compétences techniques</div>
+    <br>
+    <div class="skills-wrap">
+      <span class="skill">Python</span>
+      <span class="skill">C / C++</span>
+      <span class="skill">Java</span>
+      <span class="skill">SQL</span>
+      <span class="skill">NoSQL</span>
+      <span class="skill">Deep Learning</span>
+      <span class="skill">Sparse Coding</span>
+      <span class="skill">Analyse en ondelettes</span>
+      <span class="skill">CUDA / GPU</span>
+      <span class="skill">Réseaux (CCNA / HCIA)</span>
+      <span class="skill">Web sémantique</span>
+      <span class="skill">Big Data</span>
+      <span class="skill">Visualisation</span>
+      <span class="skill">JavaScript</span>
+    </div>
+  </section>
+
+  <!-- ENSEIGNEMENT -->
+  <section id="enseignement">
+    <div class="section-label">Pédagogie</div>
+    <h2>Activités d'enseignement</h2>
+
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-n">18</div><div class="stat-l">ans d'expérience</div></div>
+      <div class="stat-card"><div class="stat-n">~400h</div><div class="stat-l">par an à l'IUT</div></div>
+      <div class="stat-card"><div class="stat-n">4</div><div class="stat-l">établissements</div></div>
+      <div class="stat-card"><div class="stat-n">30+</div><div class="stat-l">modules distincts</div></div>
+    </div>
+
+    <h3 style="margin-bottom:1rem;font-size:14px;color:var(--muted);font-weight:400;letter-spacing:0.04em;text-transform:uppercase;">BUT Science des Données — IUT Aurillac (2025–présent)</h3>
+    <div class="cards" style="margin-bottom:2rem">
+      <div class="card"><h4>Bases de données relationnelles 1 &amp; 2</h4><p>Modélisation, SQL, conception de schémas (R1.02, R2.02)</p><span class="tag">L1 / L2</span></div>
+      <div class="card"><h4>Bases de la programmation 1 &amp; 2</h4><p>Algorithmique, Python, structures de données (R1.03, R2.03)</p><span class="tag">L1 / L2</span></div>
+      <div class="card"><h4>Bases de données NoSQL</h4><p>MongoDB, migration, gestion des données non structurées (R5.01)</p><span class="tag">L3</span></div>
+      <div class="card"><h4>Technologies web</h4><p>Collecte automatisée, web scraping (R3.03, SAÉ 4)</p><span class="tag">L2</span></div>
+      <div class="card"><h4>Programmation web &amp; visualisation</h4><p>Visualisation de données, dashboards (R5.VCOD.07)</p><span class="tag">L3</span></div>
+      <div class="card"><h4>Big Data</h4><p>Approfondissement, architectures distribuées (R6-01-VCOD)</p><span class="tag">L3</span></div>
+      <div class="card"><h4>Automatisation &amp; tests</h4><p>Tests logiciels, intégration continue (R4.01)</p><span class="tag">L2</span></div>
+      <div class="card"><h4>Systèmes d'information décisionnels</h4><p>Entrepôts de données, OLAP (R3.02)</p><span class="tag">L2</span></div>
+    </div>
+
+    <h3 style="margin-bottom:1rem;font-size:14px;color:var(--muted);font-weight:400;letter-spacing:0.04em;text-transform:uppercase;">Université de Tours — ATER (2023–2025)</h3>
+    <div class="cards" style="margin-bottom:2rem">
+      <div class="card"><h4>Développement Objet C++</h4><p>POO, structures avancées, projets</p><span class="tag">L2</span></div>
+      <div class="card"><h4>Interrogation de bases de données</h4><p>SQL avancé, requêtes complexes</p><span class="tag">L2</span></div>
+      <div class="card"><h4>Conception de bases de données</h4><p>Modèle E/A, normalisation</p><span class="tag">L2</span></div>
+      <div class="card"><h4>BD &amp; programmation web</h4><p>PHP, MySQL, applications dynamiques</p><span class="tag">L1</span></div>
+      <div class="card"><h4>Données du web &amp; connaissances</h4><p>Web sémantique, ontologies</p><span class="tag">M1</span></div>
+    </div>
+
+    <h3 style="margin-bottom:1rem;font-size:14px;color:var(--muted);font-weight:400;letter-spacing:0.04em;text-transform:uppercase;">ISET Gabès &amp; Kébili (2007–2023)</h3>
+    <div class="cards">
+      <div class="card"><h4>Certifications CCNA / HCIA</h4><p>Préparation certifications Cisco &amp; Huawei</p><span class="tag">L3</span></div>
+      <div class="card"><h4>Administration de bases de données</h4><p>Oracle, administration système</p><span class="tag">L3</span></div>
+      <div class="card"><h4>Sécurité réseaux</h4><p>Politiques de sécurité, audit, NAC</p><span class="tag">L3 / M1</span></div>
+      <div class="card"><h4>Programmation évènementielle</h4><p>Java Swing, interfaces graphiques</p><span class="tag">L2</span></div>
+      <div class="card"><h4>Multimédia &amp; Internet</h4><p>HTML/CSS/JS, développement web</p><span class="tag">L3</span></div>
+      <div class="card"><h4>Algorithmique &amp; structures</h4><p>Algorithmes fondamentaux, complexité</p><span class="tag">L1</span></div>
+    </div>
+  </section>
+
+  <!-- RECHERCHE -->
+  <section id="recherche">
+    <div class="section-label">Science</div>
+    <h2>Activités de recherche</h2>
+
+    <div class="card" style="margin-bottom:1.8rem;border-left:3px solid var(--blue);border-radius:0 10px 10px 0;">
+      <h4 style="font-size:15px;margin-bottom:6px">Axe principal : Classification automatique d'images médicales par apprentissage profond</h4>
+      <p style="font-size:13px;line-height:1.7">
+        Mes travaux portent sur le développement de méthodes innovantes combinant réseaux de neurones profonds, codage parcimonieux (<em>sparse coding</em>) et analyse par ondelettes. L'objectif est d'améliorer la détection automatique d'anomalies médicales (caries dentaires, pathologies pulmonaires, COVID-19) pour l'aide au diagnostic.
+      </p>
+    </div>
+
+    <div class="cards" style="margin-bottom:2rem">
+      <div class="card">
+        <h4>Segmentation GPU</h4>
+        <p>Contours actifs sans bords (Chan &amp; Vese), implémentation parallèle CUDA pour accélération sur GPU.</p>
+        <span class="tag">CUDA / OpenMP</span>
+      </div>
+      <div class="card">
+        <h4>Deep Stacked Patched AE</h4>
+        <p>Auto-encodeurs parcimonieux empilés avec analyse en ondelettes pour classification fine d'images médicales.</p>
+        <span class="tag">Deep Learning</span>
+      </div>
+      <div class="card">
+        <h4>Sparse Wavelet Auto-encoder</h4>
+        <p>Identification de cas COVID-19 sur images radiographiques par apprentissage non supervisé.</p>
+        <span class="tag">Imagerie médicale</span>
+      </div>
+      <div class="card">
+        <h4>Détection de caries dentaires</h4>
+        <p>Classification sur radiographies par réseaux de neurones profonds + classificateur softmax.</p>
+        <span class="tag">DNN / Softmax</span>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:1rem">Laboratoires d'accueil</h3>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-year">2023–2025</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><h3>LIFAT — équipe RFAI</h3><p>Université de Tours</p></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2014–2020</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><h3>REGIM</h3><p>École Nationale d'Ingénieurs de Sfax</p></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2014–2020</div>
+        <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><h3>RTIM — ENIG</h3><p>Université de Gabès</p></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2rem;margin-bottom:1rem">Encadrement de masters de recherche</h3>
+    <div class="cards">
+      <div class="card">
+        <h4>Système automatique pour la détection des caries dentaires</h4>
+        <p>Marwa Chaabene — ISIM Gabès, soutenu le 10/12/2016. Segmentation d'images radiographiques.</p>
+        <span class="tag">Master recherche</span>
+      </div>
+      <div class="card">
+        <h4>Classification d'images médicales — Deep Learning &amp; ondelettes</h4>
+        <p>Houda Lazrek — FSG Gabès, soutenu le 18/12/2020. Sparse coding + transformée en ondelettes.</p>
+        <span class="tag">Master recherche</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-label">Bibliographie</div>
+    <h2>Publications</h2>
+
+    <div class="stats-row" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat-card"><div class="stat-n">2</div><div class="stat-l">Journaux internationaux</div></div>
+      <div class="stat-card"><div class="stat-n">4</div><div class="stat-l">Conférences internationales</div></div>
+      <div class="stat-card"><div class="stat-n">1</div><div class="stat-l">Book chapter</div></div>
+      <div class="stat-card"><div class="stat-n">1</div><div class="stat-l">Article soumis</div></div>
+    </div>
+
+    <div class="pub-list">
+
+      <div class="pub">
+        <div class="pub-bar"></div>
+        <div class="pub-body">
+          <div class="pub-title">Classification of medical images based on deep stacked patched auto-encoders</div>
+          <div class="pub-authors">Ramzi Ben Ali, R. Ejbali, M. Zaied — 2020</div>
+          <div class="pub-venue">Multimedia Tools and Applications (MTAP), Springer</div>
+          <span class="pub-type journal">Journal</span>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-bar"></div>
+        <div class="pub-body">
+          <div class="pub-title">A Deep Convolutional Neural Wavelet Network for Classification of Medical Images</div>
+          <div class="pub-authors">Ramzi Ben Ali, R. Ejbali, M. Zaied — 2018</div>
+          <div class="pub-venue">Journal of Computer Science</div>
+          <span class="pub-type journal">Journal</span>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-bar"></div>
+        <div class="pub-body">
+          <div class="pub-title">Use of Deep Convolutional Neural Wavelet Network for Classification of Medical Images: A Novel Approach</div>
+          <div class="pub-authors">Ramzi Ben Ali, R. Ejbali, M. Zaied — 2024</div>
+          <div class="pub-venue">Research Updates in Mathematics and Computer Science — B P International</div>
+          <span class="pub-type book">Book chapter</span>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-bar"></div>
+        <div class="pub-body">
+          <div class="pub-title">Sparse Wavelet Auto-encoder for Covid-19 Cases Identification</div>
+          <div class="pub-authors">H. Lazrag, R. Ben Ali, R. Ejbali — 2020</div>
+          <div class="pub-venue">20th International Conference on Hybrid Intelligent Systems (HIS 2020)</div>
+          <span class="pub-type conf">Conférence</span>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-bar"></div>
+        <div class="pub-body">
+          <div class="pub-title">Detection and Classification of Dental Caries in X-ray Images Using Deep Neural Networks</div>
+          <div class="pub-authors">R. Ben Ali, R. Ejbali, M. Zaied — 2016</div>
+          <div class="pub-venue">11th International Conference on Software Engineering Advances (ICSEA 2016)</div>
+          <span class="pub-type conf">Conférence</span>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-bar"></div>
+        <div class="pub-body">
+          <div class="pub-title">Hybrid approach for detection of dental caries based on the methods FCM and Level sets</div>
+          <div class="pub-authors">M. Chaabene, R. Ben Ali, R. Ejbali, M. Zaied — 2016</div>
+          <div class="pub-venue">9th International Conference on Machine Vision (ICMV 2016)</div>
+          <span class="pub-type conf">Conférence</span>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-bar"></div>
+        <div class="pub-body">
+          <div class="pub-title">GPU-based Segmentation of Dental X-ray Images using Active Contours Without Edges</div>
+          <div class="pub-authors">R. Ben Ali, R. Ejbali, M. Zaied — 2015</div>
+          <div class="pub-venue">15th International Conference on Intelligent Systems Design and Applications (ISDA 2015)</div>
+          <span class="pub-type conf">Conférence</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-label">Certifications</div>
+    <h2>Certifications professionnelles</h2>
+    <div class="cert-list">
+      <div class="cert"><div class="cert-icon">🏅</div><div><h4>HCIA-R&amp;S — Huawei Certified ICT Associate (Routing &amp; Switching)</h4><p>Juillet 2021</p></div></div>
+      <div class="cert"><div class="cert-icon">🏅</div><div><h4>HCNA-R&amp;S — Huawei Certified Network Associate</h4><p>Juillet 2018</p></div></div>
+      <div class="cert"><div class="cert-icon">🎓</div><div><h4>HCAI-R&amp;S Academy Instructor — Huawei</h4><p>Juillet 2018</p></div></div>
+      <div class="cert"><div class="cert-icon">💻</div><div><h4>ICDL — International Computer Driving Licence</h4><p>Août 2017</p></div></div>
+      <div class="cert"><div class="cert-icon">✅</div><div><h4>Accredited Tester ICDL</h4><p>Septembre 2017</p></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <h2>Me contacter</h2>
+    <div class="cards" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+      <div class="card">
+        <h4>Email professionnel</h4>
+        <p><a href="mailto:ramzi.benali@uca.fr" style="color:var(--blue)">ramzi.benali@uca.fr</a></p>
+      </div>
+      <div class="card">
+        <h4>Email personnel</h4>
+        <p><a href="mailto:ramzi.benali@gmail.com" style="color:var(--blue)">ramzi.benali@gmail.com</a></p>
+      </div>
+      <div class="card">
+        <h4>Adresse</h4>
+        <p>IUT Aurillac — 100 rue de l'Égalité, 15000 Aurillac</p>
+      </div>
+      <div class="card">
+        <h4>Téléphone</h4>
+        <p>07 78 20 61 10</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>© 2025 Ramzi Ben Ali · Enseignant-Chercheur · Université Clermont Auvergne</p>
+  <p style="margin-top:6px">
+    <a href="https://scholar.google.com" target="_blank">Google Scholar</a> ·
+    <a href="https://www.researchgate.net" target="_blank">ResearchGate</a> ·
+    <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+  </p>
+</footer>
+
+<script>
+  // Navigation active selon scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Gestion photo profil
+  const img = document.getElementById('profile-photo');
+  const initials = document.getElementById('initials');
+  if (img) {
+    img.onload = () => { img.style.display = 'block'; initials.style.display = 'none'; };
+    img.onerror = () => { img.style.display = 'none'; initials.style.display = ''; };
+  }
+</script>
+</body>
+</html>
